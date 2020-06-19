@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <new>
 #include <iostream>
 #include <vector>
@@ -10,21 +10,21 @@
 #include "CString.h"
 
 using namespace std;
- 
+
 CString::~CString()
 {
 	cout << "death" << endl;
-	delete[]  word;
+	delete[] word;
 }
 
-CString::CString(const char* w)
+CString::CString(const char *w)
 {
 	int l = strlen(w);
 	word = new char[l];
 	strcpy(word, w);
 }
 
-CString::CString(const CString& c)
+CString::CString(const CString &c)
 {
 	int l = strlen(c.word);
 	word = new char[l];
@@ -38,8 +38,12 @@ CString::CString()
 	strcpy(word, "");
 }
 
+void CString::operator=(CString &c)
+{
+	word = c.word;
+}
 
-bool CString::operator ==(const CString& c)
+bool CString::operator==(const CString &c)
 {
 	if (c.word == word)
 	{
@@ -50,10 +54,9 @@ bool CString::operator ==(const CString& c)
 	{
 		return false;
 	}
-
 }
 
-bool CString::operator !=(const CString& c)
+bool CString::operator!=(const CString &c)
 {
 	if (c.word != word)
 	{
@@ -66,10 +69,9 @@ bool CString::operator !=(const CString& c)
 	}
 }
 
-
-const char* CString::operator +=(const char c)
+const char *CString::operator+=(const char c)
 {
-	char* temp;
+	char *temp;
 	int l = strlen(word);
 	temp = new char[l];
 	strcpy(temp, word);
@@ -78,17 +80,13 @@ const char* CString::operator +=(const char c)
 	word[l] = c;
 	return word;
 }
- 
 
-const char* CString::getWord()
+const char *CString::getWord()
 {
 	return word;
 }
-
 
 void CString::print()
 {
 	cout << getWord() << endl;
 }
-
- 
