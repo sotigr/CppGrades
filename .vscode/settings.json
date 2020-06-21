@@ -2,6 +2,7 @@
     "files.associations": {
         "vector": "cpp",
         "new": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "iosfwd": "cpp"
     }
 }
