@@ -3,7 +3,7 @@
 #include "Grades.h"
 using namespace std;
 
-Grades::Grades(CString &AM, CString &courseCode, float grade)
+Grades::Grades(CString *AM, CString *courseCode, float grade)
 {
     this->AM = AM;
     this->courseCode = courseCode;
@@ -19,12 +19,12 @@ Grades::Grades(Grades &g)
 
 CString *Grades::getAM()
 {
-    return &AM;
+    return AM;
 }
 
 CString *Grades::getcourseCode()
 {
-    return &courseCode;
+    return courseCode;
 }
 
 float Grades::getgrade()

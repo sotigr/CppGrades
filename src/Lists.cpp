@@ -5,24 +5,24 @@
 #include "Lists.h"
 using namespace std;
 
-Lists::Lists(vector<Grades *> &vg, vector<Students *> &vs, vector<Courses *> &vc)
+Lists::Lists(vector<Grades *> *vg, vector<Students *> *vs, vector<Courses *> *vc)
 {
     gradeList = vg;
     studentsList = vs;
-    oursesList = vc;
+    coursesList = vc;
 }
 
 vector<Grades *> *Lists::getGradeList()
 {
-    return &gradeList;
+    return gradeList;
 }
 
 vector<Students *> *Lists::getStudentsList()
 {
-    return &studentsList;
+    return studentsList;
 }
 
-vector<Courses *> *Lists::etOursesList()
+vector<Courses *> *Lists::getOursesList()
 {
-    return &oursesList;
+    return coursesList;
 }

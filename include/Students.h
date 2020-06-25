@@ -15,13 +15,14 @@ using namespace std;
 class Students
 {
 private:
-    CString AM;
-    CString name;
-    CString sName;
-    vector<Grades *> studentsGrades;
+    CString * AM;
+    CString * name;
+    CString * sName;
+    vector<Grades *> * studentsGrades;
 
 public:
-    Students(CString &, CString &, CString &, vector<Grades *>);
+    Students(CString *, CString *, CString *, vector<Grades *>*);
+    Students(CString *, CString *, CString *);
     Students(Students &);
 
     CString *getAM();

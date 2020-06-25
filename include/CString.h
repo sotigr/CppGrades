@@ -7,6 +7,7 @@
 #include <fstream>
 #include <list>
 #include <sstream>
+#include <string.h>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class CString
 private:
 	char *word;
 
-public:
+public: 
 	CString(const char *);
 	CString(const CString &);
 	CString();
@@ -26,6 +27,7 @@ public:
 	bool operator!=(const CString &);
 
 	const char *operator+=(const char);
-	void print();
+	void print(); 
+ 	vector<CString*>* split(const char* delimiters);
 	const char *getWord();
 };

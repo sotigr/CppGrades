@@ -14,12 +14,12 @@ using namespace std;
 class Grades
 {
 private:
-    CString AM;
-    CString courseCode;
+    CString* AM;
+    CString* courseCode;
     float grade;
 
 public:
-    Grades(CString &, CString &, float);
+    Grades(CString *, CString *, float);
     Grades(Grades &);
 
     CString *getAM();

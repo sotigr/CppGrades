@@ -17,13 +17,13 @@ using namespace std;
 class Lists
 {
 private:
-    vector<Grades *> gradeList;
-    vector<Students *> studentsList;
-    vector<Courses *> oursesList;
+    vector<Grades *> *gradeList;
+    vector<Students *> *studentsList;
+    vector<Courses *> *coursesList;
 
 public:
-    Lists(vector<Grades *> &, vector<Students *> &, vector<Courses *> &);
+    Lists(vector<Grades *> *, vector<Students *> *, vector<Courses *> *);
     vector<Grades *> *getGradeList();
     vector<Students *> *getStudentsList();
-    vector<Courses *> *etOursesList();
+    vector<Courses *> *getOursesList();
 };

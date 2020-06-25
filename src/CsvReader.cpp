@@ -1,38 +1,39 @@
 #include "CsvReader.h"
 
-CsvReader::CsvReader(const char *filePath, const int *numOfCols)
+CsvReader::CsvReader(const char *filePath)
 {
-    strcpy(path, filePath);
-    cols = (int*)malloc(sizeof(int));
-    memcpy(cols, &numOfCols, sizeof(int));
+    path = new char[strlen(filePath)];
+    strcpy(path, filePath); 
 }
 
-// CsvReader::~CsvReader()
-// {
-//     delete [] path;
-//     delete cols;
-// }
-
-vector<char **> *CsvReader::read()
+CsvReader::~CsvReader()
 {
-    vector<char **> *rows = new vector<char **>();
-    ifstream infile("test.txt");
+    delete [] path; 
+}
 
-    char line[1024];
+CSV_RESULT * CsvReader::read(const bool skipFirstLine)
+{
+    CSV_RESULT * rows = new CSV_RESULT();
+    ifstream infile(path);
+
+    int bufferSize = 1024;
+    char line[bufferSize];
     
     int cn = 0;
 
-    while( infile.getline( line, 1024 ) )
-    { 
-        cout << strlen(line) << endl; 
-        cout << line << endl;
+    while( infile.getline( line, bufferSize ) )
+    {  
+        if (!(skipFirstLine && cn == 0)) { 
 
-        int len = strlen(line);
+            CString * str = new CString(line);
 
-        //TODO IMPLEMENT SPLIT FUNCTION IN CString class
-        
+            vector<CString*>* data = str->split(";");
+
+            rows->push_back(data); 
+
+        }
         cn++;
     }
 
-    return rows;
+    return rows; 
 }

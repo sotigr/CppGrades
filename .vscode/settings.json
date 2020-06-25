@@ -3,6 +3,8 @@
         "vector": "cpp",
         "new": "cpp",
         "*.tcc": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "deque": "cpp",
+        "string": "cpp"
     }
 }

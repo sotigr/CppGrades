@@ -13,7 +13,6 @@ using namespace std;
 
 CString::~CString()
 {
-	cout << "death" << endl;
 	delete[] word;
 }
 
@@ -89,4 +88,28 @@ const char *CString::getWord()
 void CString::print()
 {
 	cout << getWord() << endl;
+}
+
+vector<CString *> *CString::split(const char *delimiters)
+{
+	vector<CString *> *v = new vector<CString *>();
+
+	char *temp = new char[strlen(word)];
+		
+	strcpy(temp, word);
+	
+	char *piece = strtok(temp, delimiters);
+
+	strcpy(temp, piece);
+	v->push_back(new CString(temp));
+
+	piece = strtok(NULL, delimiters);
+	while (piece != NULL)
+	{
+		strcpy(temp, piece);
+		v->push_back(new CString(temp));
+		piece = strtok(NULL, delimiters);
+	}
+
+	return v;
 }

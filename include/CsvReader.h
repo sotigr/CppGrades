@@ -9,6 +9,7 @@
 #include <cstring>
 #include "CString.h"
 #include <fstream>
+#define CSV_RESULT vector<vector<CString*>*>
 
 using namespace std;
 
@@ -16,10 +17,9 @@ class CsvReader
 {
 private:
     char *path;
-    int *cols;
 
 public:
-    CsvReader(const char *filePath, const int *numOfCols);
-    // ~CsvReader();
-    vector<char **> *read();
+    CsvReader(const char *filePath);
+    ~CsvReader();
+    CSV_RESULT * read(const bool skipFirstLine);
 };

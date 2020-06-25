@@ -4,13 +4,21 @@
 #include "Students.h"
 using namespace std;
 
-Students::Students(CString &AM, CString &name, CString &sName, vector<Grades *> studentsGrades)
+Students::Students(CString *AM, CString *name, CString *sName, vector<Grades *> *studentsGrades)
 {
     this->AM = AM;
     this->name = name;
     this->sName = sName;
     this->studentsGrades = studentsGrades;
 }
+
+Students::Students(CString *AM, CString *name, CString *sName)
+{
+    this->AM = AM;
+    this->name = name;
+    this->sName = sName; 
+}
+
 
 Students::Students(Students &s)
 {
@@ -22,20 +30,20 @@ Students::Students(Students &s)
 
 CString *Students::getAM()
 {
-    return &AM;
+    return AM;
 }
 
 CString *Students::getname()
 {
-    return &name;
+    return name;
 }
 
 CString *Students::getSName()
 {
-    return &sName;
+    return sName;
 }
 
 vector<Grades *> *Students::getStudentsGrades()
 {
-    return &studentsGrades;
+    return studentsGrades;
 }
