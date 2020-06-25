@@ -26,9 +26,6 @@
                     "text": "-interpreter-exec console \"skip -gfi stdio-common/*.c\""
                 }          
             ], 
-            // "sourceFileMap": {
-            //     "/build/glibc-YYA7BZ": "/usr/src/glibc"
-            // },
             "preLaunchTask": "build"
 
         }
