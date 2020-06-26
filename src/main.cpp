@@ -15,6 +15,9 @@ vector<Grades *> *allGrades;
 vector<Students *> *allStudents;
 vector<Courses *> *allCourses;
 
+
+// READERS  ==============
+
 vector<Grades *> *readGrades()
 {
     CsvReader readerGrades("/home/sotig/Desktop/Projects/CppGrades/docs/grades.csv");
@@ -30,6 +33,7 @@ vector<Grades *> *readGrades()
 
         auto AM = row[0];
         auto courseCode = row[1];
+
         float gradeVal = atof(row[2]->getWord());
 
         Grades *grade = new Grades(AM, courseCode, gradeVal);
@@ -104,9 +108,19 @@ vector<Courses *> *readCourses()
     return allCourses;
 }
 
+// END READERS ====================
 
 
-Courses * getCourseFromGrade(CString *gradeCode)
+
+// HELPER FUNCTIONS =====================
+
+struct course_grade_t
+{
+    Courses *course;
+    bool isOld;
+};
+
+course_grade_t getCourseFromGrade(CString *gradeCode)
 {
     int courseCount = allCourses->size();
 
@@ -116,23 +130,64 @@ Courses * getCourseFromGrade(CString *gradeCode)
         CString newCode = *(curCourse->getNewCourseCode());
 
         if (newCode == *gradeCode)
-        { 
-            return curCourse;
+        {
+            course_grade_t re;
+            re.course = curCourse;
+            re.isOld = false;
+            return re;
         }
 
         if (curCourse->getOldCourseCode() != NULL)
         {
             CString oldCode = *(curCourse->getOldCourseCode());
- 
+
             if (oldCode == *gradeCode)
-            { 
-                return curCourse;
+            {
+                course_grade_t re;
+                re.course = curCourse;
+                re.isOld = true;
+                return re;
             }
         }
     }
+    course_grade_t re;
+    re.course = NULL;
+    return re;
+}
 
+Grades *getNewGrade(CString *newCourseCode, CString *AM)
+{
+    int allGradesCn = allGrades->size();
+    for (int i = 0; i < allGradesCn; i++)
+    {
+        Grades *grade = (*allGrades)[i];
+
+        if ((*grade->getAM()) == *AM && (*grade->getcourseCode()) == (*newCourseCode))
+        {
+            return grade;
+        }
+    }
     return NULL;
 }
+
+Students *getStudentByAm(CString *AM)
+{
+    int studentCn = allStudents->size();
+    for (int i = 0; i < studentCn; i++)
+    {
+        Students *student = (*allStudents)[i];
+        if ((*student->getAM()) == (*AM))
+        {
+            return student;
+        }
+    }
+    return NULL;
+}
+
+// END HELPER FUNCTIONS ====================
+
+
+
 
 int main()
 {
@@ -144,14 +199,49 @@ int main()
 
     int gradeCn = allGrades->size();
     int courseCount = allCourses->size();
-    for (int i = 0; i < gradeCn; i++)
-    { 
-          Courses *course = getCourseFromGrade(((*allGrades)[i]->getcourseCode()));
 
-        if (course != NULL)
-        { 
-            course->getNewCourseTitle()->print();
+    for (int i = 0; i < gradeCn; i++)
+    {
+        Grades *grade = (*allGrades)[i];
+        course_grade_t course = getCourseFromGrade(grade->getcourseCode());
+
+        if (course.course != NULL)
+        {      
+            if (course.isOld) {
+                CString *newCourseCode = course.course->getNewCourseCode();
+                Grades *newGrade = getNewGrade(newCourseCode, grade->getAM());
+
+                if (!newGrade || newGrade->getgrade() != grade->getgrade())
+                {
+                    if (newGrade)
+                    {
+
+                        Students *student = getStudentByAm(grade->getAM());
+                        if (student)
+                        {
+                            CString studentName = *student->getname();
+                            CString courseName = *course.course->getNewCourseTitle();
+                            float oldGradeVal = grade->getgrade();
+                            float newGradeVal = newGrade->getgrade();
+
+                            cout << studentName.getWord() << courseName.getWord() << oldGradeVal << newGradeVal<< endl;
+                        }
+                        else
+                        {
+                            cout << "no student found with AM " << grade->getAM()->getWord() << endl;
+                        }
+                    }
+                    else
+                    {
+                        cout << "new grade not found" << endl;
+                    }
+    
+                }
+            }
+        } else {
+            CString  notFoundCourseCode = *grade->getcourseCode();
+            cout<< "course: " << notFoundCourseCode.getWord() << " was not found" << endl;
         }
-        // cout<< course->getNewCourseTitle()->getWord() << isNewCode<<endl;
+ 
     }
 }

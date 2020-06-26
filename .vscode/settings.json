@@ -6,6 +6,7 @@
         "iosfwd": "cpp",
         "deque": "cpp",
         "string": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "ostream": "cpp"
     }
 }

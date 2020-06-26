@@ -29,5 +29,5 @@ CString *Grades::getcourseCode()
 
 float Grades::getgrade()
 {
-    return grade;
+    return this->grade;
 }
