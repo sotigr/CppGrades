@@ -29,4 +29,5 @@ public:
     CString *getname();
     CString *getSName();
     vector<Grades *> *getStudentsGrades();
+ 
 };

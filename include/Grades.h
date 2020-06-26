@@ -21,6 +21,7 @@ private:
 public:
     Grades(CString *, CString *, float);
     Grades(Grades &);
+    
 
     CString *getAM();
     CString *getcourseCode();

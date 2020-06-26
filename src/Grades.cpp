@@ -12,8 +12,8 @@ Grades::Grades(CString *AM, CString *courseCode, float grade)
 
 Grades::Grades(Grades &g)
 {
-    AM = g.AM;
-    courseCode = g.courseCode;
+    AM = new CString(*g.AM);
+    courseCode = new CString(*g.courseCode);
     grade = g.grade;
 }
 

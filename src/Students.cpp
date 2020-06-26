@@ -3,29 +3,22 @@
 #include "Grades.h"
 #include "Students.h"
 using namespace std;
-
-Students::Students(CString *AM, CString *name, CString *sName, vector<Grades *> *studentsGrades)
-{
-    this->AM = AM;
-    this->name = name;
-    this->sName = sName;
-    this->studentsGrades = studentsGrades;
-}
+ 
 
 Students::Students(CString *AM, CString *name, CString *sName)
 {
     this->AM = AM;
     this->name = name;
     this->sName = sName; 
+    
 }
 
 
 Students::Students(Students &s)
 {
-    AM = s.AM;
-    name = s.name;
-    sName = s.sName;
-    studentsGrades = s.studentsGrades;
+    AM = new CString(*s.AM);
+    name = new CString(*s.name);
+    sName = new CString(*s.sName); 
 }
 
 CString *Students::getAM()
@@ -47,3 +40,4 @@ vector<Grades *> *Students::getStudentsGrades()
 {
     return studentsGrades;
 }
+ 

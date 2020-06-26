@@ -43,29 +43,23 @@ void CString::operator=(CString &c)
 }
 
 bool CString::operator==(const CString &c)
-{
-	if (c.word == word)
-	{
-		cout << "equal" << endl;
+{ 
+ 
+	if (strcmp (c.word , word) == 0) { 	
 		return true;
-	}
-	else
-	{
+	} else {
 		return false;
-	}
+	} 
+	 
 }
 
 bool CString::operator!=(const CString &c)
-{
-	if (c.word != word)
-	{
-		cout << "not equal" << endl;
+{ 
+	if (strcmp (c.word , word) != 0) { 	
 		return true;
-	}
-	else
-	{
+	} else {
 		return false;
-	}
+	} 
 }
 
 const char *CString::operator+=(const char c)

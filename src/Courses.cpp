@@ -2,7 +2,7 @@
 #include "CString.h"
 using namespace std;
 
-Courses::Courses(CString &newCC, CString &newCT, CString &oldCC, CString &oldCT, bool oldExists)
+Courses::Courses(CString *newCC, CString *newCT, CString *oldCC, CString *oldCT, bool oldExists)
 {
     newCourseCode = newCC;
     newCourseTitle = newCT;
@@ -13,31 +13,31 @@ Courses::Courses(CString &newCC, CString &newCT, CString &oldCC, CString &oldCT,
 
 Courses::Courses(Courses &c)
 {
-    newCourseCode = c.newCourseCode;
-    newCourseTitle = c.newCourseTitle;
-    oldCourseCode = c.oldCourseCode;
-    oldCourseTitle = c.oldCourseTitle;
+    newCourseCode = new CString(*c.newCourseCode);
+    newCourseTitle = new CString(*c.newCourseTitle);
+    oldCourseCode = new CString(*c.oldCourseCode);
+    oldCourseTitle = new CString(*c.oldCourseTitle);
     oldExists = c.oldExists;
 }
 
 CString *Courses::getNewCourseCode()
 {
-    return &newCourseCode;
+    return newCourseCode;
 }
 
 CString *Courses::getNewCourseTitle()
 {
-    return &newCourseTitle;
+    return newCourseTitle;
 }
 
 CString *Courses::getOldCourseCode()
 {
-    return &oldCourseCode;
+    return oldCourseCode;
 }
 
 CString *Courses::getOldCourseTitle()
 {
-    return &oldCourseTitle;
+    return oldCourseTitle;
 }
 
 bool const Courses::getOldExists()
